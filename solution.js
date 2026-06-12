@@ -1,30 +1,27 @@
-let reservation =
-{
-    startDate: null,
-    endDate: null,
-    guestsCount: 0,
-    roomType: null,
-    name: null,
-    phone: null,
-    email: null
-}
+let reservation = {
+    startDate: null, endDate: null, guestsCount: 0,
+    roomType: null, name: null, phone: null, email: null
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Начално състояние
+    changeContent('search-form-content');
+
+    // Листъри
+    document.querySelector('#search-form-button').addEventListener('click', searchFormData);
+    document.querySelector('#search-back-btn').addEventListener('click', fillSearchForm);
+    document.querySelector('#search-next-btn').addEventListener('click', findRoom);
+    
+    document.querySelectorAll('.room-type').forEach(room => {
+        room.addEventListener("click", selectRoomType);
+    });
+});
 
 function changeContent(className) {
     document.querySelectorAll('.custom-form').forEach(div => div.classList.add('hidden'));
-    if( document.querySelector(`.${className}`) != null){
-    document.querySelector(`.${className}`).classList.remove('hidden');
-    }
+    let el = document.querySelector(`.${className}`);
+    if (el) el.classList.remove('hidden');
 }
-
-document.querySelector('#new-reservation').addEventListener('click', (e) => cleanData(e));
-
-function cleanData(e) {
-    changeContent('search-form-content');
-}
-
-
-changeContent('search-form-content');
-document.querySelector('#search-form-button').addEventListener('click', (e) => searchFormData(e));
 
 function searchFormData(e) {
     e.preventDefault();
@@ -32,17 +29,14 @@ function searchFormData(e) {
     const checkIn = data.querySelector('#check-in').value;
     const checkOut = data.querySelector('#check-out').value;
     const people = data.querySelector('#people').value;
-    if (checkIn != '' && checkOut != '' && people != '' &&
-        new Date(checkIn) <= new Date(checkOut)) {
+
+    if (checkIn && checkOut && people && new Date(checkIn) <= new Date(checkOut)) {
         reservation.startDate = checkIn;
         reservation.endDate = checkOut;
         reservation.guestsCount = people;
-        console.log(reservation);
         changeContent('search-result-form-content');
     }
 }
-
-document.querySelector('#search-back-btn').addEventListener('click', (e) => fillSearchForm(e));
 
 function fillSearchForm(e) {
     e.preventDefault();
@@ -52,32 +46,17 @@ function fillSearchForm(e) {
     document.querySelector('#people').value = reservation.guestsCount;
 }
 
-
-document.querySelectorAll('.room-type').forEach(room => {
-    room.addEventListener("click", (e) => selectRoomType(e))
-});
-
 function selectRoomType(e) {
-    let myTarget = undefined;
-    e.preventDefault;
-    if (e.target.querySelector('img') != null) {
-        myTarget = e.target;
-    } else {
-        myTarget = e.target.parentElement;
-    }
-    document.querySelectorAll('.room-type').forEach(room =>
-        room.classList.remove('selected-room'));
+    let myTarget = e.currentTarget;
+    document.querySelectorAll('.room-type').forEach(room => room.classList.remove('selected-room'));
     myTarget.classList.add('selected-room');
 }
 
-document.querySelector('#search-next-btn').addEventListener('click', (e) => findRoom(e));
-
 function findRoom(e) {
     e.preventDefault();
-    const roomInfo = e.target.parentElement.parentElement.querySelector('.selected-room h4').textContent;
-    reservation.roomType = roomInfo;
-    console.log(reservation);
-    changeContent('guest-details-form-content');
-
+    const selected = document.querySelector('.selected-room');
+    if (selected) {
+        reservation.roomType = selected.querySelector('h4').textContent;
+        changeContent('guest-details-form-content');
+    }
 }
-
