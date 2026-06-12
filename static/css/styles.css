@@ -1,11 +1,10 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap');
 
 *, *:before, *:after { padding: 0; margin: 0; box-sizing: border-box; }
 
 body {
-    font-family: Verdana, Tahoma, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-image: url("../img/zero.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -13,6 +12,10 @@ body {
     background-color: #080710;
 }
 
+/* Скриване на елементите - КРИТИЧНО ЗА ЛОГИКАТА */
+.hidden {
+    display: none !important;
+}
 
 #welcome h1 {
     text-align: center;
@@ -21,10 +24,21 @@ body {
     background: linear-gradient(180deg, #a5c3fa 17%, #bccccd 48%, #ced7c8 57%, #f6ec99 69%, #e8b769 78%);
     -webkit-background-clip: text;
     color: transparent;
+    padding-top: 20px;
 }
 
+.site-content {
+    position: relative;
+    height: 70vh;
+}
 
-
+.custom-form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
 
 .background {
     width: 430px;
@@ -32,7 +46,8 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
-    top: 60%;
+    top: 50%;
+    z-index: -1;
 }
 
 .background .shape {
@@ -44,53 +59,41 @@ body {
 
 .shape:first-child {
     background: linear-gradient(#36251b, #7c4f30);
-    ;
-    left: -80px;
-    top: -80px;
+    left: -20px;
+    top: -20px;
 }
 
 .shape:last-child {
     background: linear-gradient(to right, #daa022, #f09819);
-    ;
-    right: -30px;
-    bottom: -80px;
+    right: -20px;
+    bottom: -20px;
 }
 
 form {
-    height: 520px;
-    width: 400px;
+    height: auto;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.13);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 60%;
-    left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-    padding: 50px 35px;
-}
-
-form * {
-    font-family: 'Poppins', sans-serif;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
+    padding: 30px;
 }
 
 form h3 {
     font-size: 32px;
     font-weight: 500;
-    line-height: 42px;
     text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 16px;
     font-weight: 500;
+    color: #ffffff;
 }
 
 input {
@@ -103,14 +106,13 @@ input {
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
-}
-
-::placeholder {
-    color: #e5e5e5;
+    color: #ffffff;
+    border: none;
+    outline: none;
 }
 
 button {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -119,63 +121,50 @@ button {
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+    border: none;
 }
 
 button:hover {
-    box-shadow: 1px 1px 11px 8px #e7a83a;
-}
-
-.site-content {
-    height: 70%;
+    box-shadow: 0 0 15px #e7a83a;
 }
 
 .buttons {
     display: flex;
-}
-
-.buttons button {
-    margin: 20px;
+    gap: 10px;
 }
 
 .offers {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 77%;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .offer-card {
     display: flex;
     align-items: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 9px;
+    padding: 10px;
     cursor: pointer;
-    background: transparent;
-    box-shadow: 1px 1px 5px 3px white;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 
-.offer-card:nth-child(3) img {
-    margin-right: 38px;
-}
-
-.offer-card:hover {
-    box-shadow: 1px 1px 18px 3px white;
+.offer-card:hover, .selected-room {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #e7a83a;
 }
 
 .offer-card img {
-    max-width: 90px;
-    margin-right: 20px;
+    max-width: 60px;
+    margin-right: 15px;
+    border-radius: 3px;
 }
 
-.confirm-reservation {
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: flex-end;
-    justify-content: center;
+.confirm-reservation h4 {
+    color: #ffffff;
+    margin: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 4px;
 }
-
