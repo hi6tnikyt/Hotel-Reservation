@@ -4,10 +4,8 @@ let reservation = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Начално състояние
     changeContent('search-form-content');
 
-    // Листъри
     document.querySelector('#search-form-button').addEventListener('click', searchFormData);
     document.querySelector('#search-back-btn').addEventListener('click', fillSearchForm);
     document.querySelector('#search-next-btn').addEventListener('click', findRoom);

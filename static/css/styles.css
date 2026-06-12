@@ -12,7 +12,6 @@ body {
     background-color: #080710;
 }
 
-/* Скриване на елементите - КРИТИЧНО ЗА ЛОГИКАТА */
 .hidden {
     display: none !important;
 }
